@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'relpathname'
-  s.version     = '0.0.3'
+  s.version     = '0.0.4'
   s.date        = Time.now.strftime '%Y-%m-%d'
   s.summary     = "Relative version of Pathname class"
   s.description = "Pathname-extension producing relative path from Pathname.cwd"

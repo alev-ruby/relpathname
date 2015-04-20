@@ -10,7 +10,7 @@ class RelPathname < Pathname
     end
 
     def to_path
-        (@initial_pwd + super).relative_path_from(Pathname.pwd)
+        (@initial_pwd + super).relative_path_from(Pathname.pwd).to_s
     end
 
     def to_s
