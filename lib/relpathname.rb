@@ -14,7 +14,8 @@ class RelPathname < Pathname
     end
 
     def to_s
-        to_path.to_s
+        prefix = to_path.each_filename.to_a[0] == '..' ? '' : './'
+        prefix + to_path.to_s
     end
 
     def + p1
