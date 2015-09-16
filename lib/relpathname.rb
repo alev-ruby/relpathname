@@ -1,10 +1,18 @@
 require 'pathname'
 
+class Pathname
+    def / p
+        self + p
+    end
+end
+
 class RelPathname < Pathname
+    @origin_path
     @initial_pwd
 
     def initialize p1
         @initial_pwd = Pathname.pwd
+        @origin_path = p1
 
         super p1
     end
@@ -17,6 +25,9 @@ class RelPathname < Pathname
         (@initial_pwd + super).relative_path_from(Pathname.pwd).to_s
     end
 
+    def to_origin_s
+        @origin_path
+    end
 
     def to_s
         prefix = to_pn.each_filename.to_a[0] == '..' ? '' : './'
@@ -25,6 +36,10 @@ class RelPathname < Pathname
 
     def + p1
         RelPathname.new to_pn + p1
+    end
+
+    def / p
+        RelPathname.new to_pn + p
     end
 
     def <=> p1
@@ -97,6 +112,14 @@ class RelPathname < Pathname
 
     def symlink?
         to_pn.symlink?
+    end
+
+    def pwd
+        RelPathname.new '.'
+    end
+
+    def exist?
+        Pathname.new(to_s).exist?
     end
 end
 
